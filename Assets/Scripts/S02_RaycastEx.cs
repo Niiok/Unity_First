@@ -105,5 +105,14 @@ public class S02_RaycastEx : MonoBehaviour
 
         float dist = Vector3.Distance(otherTrans.transform.position, this.transform.position);
         Debug.DrawRay(ray.origin, dir * dist, Color.red);
+
+        rayHits = Physics.SphereCastAll(ray, 1.0f, distance);
+        for (int i = 0; i < rayHits.Length; ++i)
+        {
+            if(rayHits[i].collider != null)
+            {
+                Destroy(rayHits[i].collider.gameObject.gameObject);
+            }
+        }
     }
 }

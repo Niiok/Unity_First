@@ -7,15 +7,22 @@ public class CarGlobal : MonoBehaviour
     private float speed = 0;
     public float accel = 0.1f;
     public float decel = 1;
+    Rigidbody rigid;
 
     // Start is called before the first frame update
     void Start()
     {
-        Mathf.Clamp(decel, 0, 100);
+        decel = Mathf.Clamp(decel, 0, 100);
+        rigid = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Update_rigid();
+    }
+
+    void Update_transform()
     {
         bool WS_pressed = false;
 
@@ -33,15 +40,52 @@ public class CarGlobal : MonoBehaviour
         print("accel = " + accel);
         print("speed = " + speed);
 
-        this.transform.Translate(0.0f, 0.0f, speed*Time.deltaTime);
+        this.transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
         speed *= ((float)(100 - decel) / 100);
 
-        if(WS_pressed)
+        if (WS_pressed)
         {
             if (Input.GetKey(KeyCode.A))
-                this.transform.Rotate(0.0f, -90.0f*Time.deltaTime, 0.0f);
+                this.transform.Rotate(0.0f, -90.0f * Time.deltaTime, 0.0f);
+
             if (Input.GetKey(KeyCode.D))
-                this.transform.Rotate(0.0f, 90.0f*Time.deltaTime, 0.0f);
+                this.transform.Rotate(0.0f, 90.0f * Time.deltaTime, 0.0f);
         }
+    }
+
+
+
+    void Update_rigid()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            rigid.AddForce(transform.forward * accel /** Time.deltaTime*/ * rigid.mass);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            rigid.AddForce(-rigid.velocity);
+            rigid.AddForce(-transform.forward * accel /** Time.deltaTime*/ * rigid.mass);
+        }
+
+        
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            this.transform.Rotate(0.0f, -90.0f * Time.deltaTime, 0.0f);
+            rigid.AddTorque(-transform.up * rigid.mass);
+            rigid.AddForce(transform.right * rigid.velocity.magnitude);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            this.transform.Rotate(0.0f, 90.0f * Time.deltaTime, 0.0f);
+            rigid.AddTorque(transform.up * rigid.mass);
+            rigid.AddForce(-transform.right * rigid.velocity.magnitude);
+        }
+
+        //if (Input.GetKey(KeyCode.A))
+        //    rigid.AddRelativeTorque(Vector3.up * rigid.mass * -2);
+        //if (Input.GetKey(KeyCode.D))
+        //    rigid.AddRelativeTorque(Vector3.up * rigid.mass * 2);
+
     }
 }

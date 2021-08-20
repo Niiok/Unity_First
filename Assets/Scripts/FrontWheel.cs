@@ -23,9 +23,9 @@ public class FrontWheel : MonoBehaviour
         //this.transform.rotation = Quaternion.AngleAxis(90.0f, Vector3.forward);
 
         if (Input.GetKey(KeyCode.A))
-            spin += 90*Time.deltaTime;
-        if (Input.GetKey(KeyCode.D))
             spin -= 90*Time.deltaTime;
+        if (Input.GetKey(KeyCode.D))
+            spin += 90*Time.deltaTime;
         //if (!Input.anyKey)
         //    spin = 0;
 
