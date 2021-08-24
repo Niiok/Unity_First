@@ -18,7 +18,7 @@ public class CarGlobal : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         Update_rigid();
     }
 
@@ -57,8 +57,10 @@ public class CarGlobal : MonoBehaviour
 
     void Update_rigid()
     {
+
         if (Input.GetKey(KeyCode.W))
         {
+            rigid.velocity = transform.forward * rigid.velocity.magnitude;
             rigid.AddForce(transform.forward * accel /** Time.deltaTime*/ * rigid.mass);
         }
         if (Input.GetKey(KeyCode.S))
@@ -71,14 +73,14 @@ public class CarGlobal : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            //this.transform.Rotate(0.0f, -30.0f * Time.deltaTime, 0.0f);
-            rigid.AddTorque(-transform.up * rigid.mass*3);
+            this.transform.Rotate(0.0f, -180.0f * Time.deltaTime, 0.0f);
+            rigid.AddTorque(-transform.up * rigid.mass);
             rigid.AddForce(transform.right * rigid.velocity.magnitude);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            //this.transform.Rotate(0.0f, 30.0f * Time.deltaTime, 0.0f);
-            rigid.AddTorque(transform.up * rigid.mass*3);
+            this.transform.Rotate(0.0f, 180.0f * Time.deltaTime, 0.0f);
+            rigid.AddTorque(transform.up * rigid.mass);
             rigid.AddForce(-transform.right * rigid.velocity.magnitude);
         }
 

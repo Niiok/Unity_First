@@ -94,6 +94,8 @@ public class AutoDrive : MonoBehaviour
 
     void MoveFront_rigid()
     {
+        rigid.velocity = transform.forward * rigid.velocity.magnitude;
+
         if (rigid.velocity.magnitude < speed_limit)
             rigid.AddForce(transform.forward * speed / 2 * rigid.mass);
     }
