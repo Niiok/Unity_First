@@ -71,14 +71,14 @@ public class CarGlobal : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            this.transform.Rotate(0.0f, -90.0f * Time.deltaTime, 0.0f);
-            rigid.AddTorque(-transform.up * rigid.mass);
+            //this.transform.Rotate(0.0f, -30.0f * Time.deltaTime, 0.0f);
+            rigid.AddTorque(-transform.up * rigid.mass*3);
             rigid.AddForce(transform.right * rigid.velocity.magnitude);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            this.transform.Rotate(0.0f, 90.0f * Time.deltaTime, 0.0f);
-            rigid.AddTorque(transform.up * rigid.mass);
+            //this.transform.Rotate(0.0f, 30.0f * Time.deltaTime, 0.0f);
+            rigid.AddTorque(transform.up * rigid.mass*3);
             rigid.AddForce(-transform.right * rigid.velocity.magnitude);
         }
 

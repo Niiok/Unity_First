@@ -85,9 +85,9 @@ public class AutoDrive : MonoBehaviour
     void Rotate(int direction)
     {
         if (direction == 1)
-            this.transform.Rotate(Vector3.up * 180 * Time.deltaTime);
+            this.transform.Rotate(Vector3.up * 30 * Time.deltaTime);
         else if (direction == -1)
-            this.transform.Rotate(Vector3.up * -180 * Time.deltaTime);
+            this.transform.Rotate(Vector3.up * -30 * Time.deltaTime);
 
         return;
     }
