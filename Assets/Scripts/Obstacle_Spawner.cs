@@ -7,18 +7,29 @@ public class Obstacle_Spawner : MonoBehaviour
     public GameObject obstaclePrefab;
     public float interval = 1.5f;
     public float range = 1.0f;
+    private float time = 0;
 
-    IEnumerator Start()
+    void Start()
     {
-        while (true)
+    }
+
+    void Update()
+    {
+        if(FlyBirdManager.Instance.state == FlyBirdManager.State.Fly)
         {
-            transform.position = new Vector3(transform.position.x,
+            time += Time.deltaTime;
+
+            if(time >= interval)
+            {
+                transform.position = new Vector3(transform.position.x,
                 Random.Range(-range, range) + 0.5f,
                 transform.position.z);
 
-            Instantiate(obstaclePrefab, transform.position, transform.rotation);
-            yield return new WaitForSeconds(interval);
+                Instantiate(obstaclePrefab, transform.position, transform.rotation);
+
+                time = 0;
+            }
         }
     }
-    
+
 }

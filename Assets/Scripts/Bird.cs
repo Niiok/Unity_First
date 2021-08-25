@@ -143,5 +143,13 @@ public class Bird : MonoBehaviour
         {
             GUI.Box(new Rect(width / 2 - width / 20, height / 20, width / 10, height / 10), "\n" + FlyBirdManager.Instance.score.ToString());
         }
+        else if (FlyBirdManager.Instance.state == FlyBirdManager.State.Ko)
+        {
+            GUI.Box(new Rect(width / 2 - width / 10, height / 10, width / 5, height / 5), "Your \nScore \nis \n\n" + FlyBirdManager.Instance.score.ToString());
+        }
+        else if (FlyBirdManager.Instance.state == FlyBirdManager.State.Sleep)
+        {
+            GUI.Box(new Rect(width / 2 - width / 10, height / 2 - height / 10, width / 5, height / 5), "\nPress \nto \nStart!");
+        }
     }
 }
