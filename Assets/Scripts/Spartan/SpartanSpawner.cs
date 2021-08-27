@@ -8,6 +8,7 @@ public class SpartanSpawner : MonoBehaviour
     public GameObject spartans;
     private float term = 0;
     float init_interval;
+    private float range = 20.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,11 @@ public class SpartanSpawner : MonoBehaviour
 
         if(term > interval)
         {
+            transform.position = new Vector3(
+                Random.Range(-range, range),
+                transform.position.y,
+                Random.Range(-range, range));
+
             term = 0;
             Instantiate(spartans, transform.position, transform.rotation);
 

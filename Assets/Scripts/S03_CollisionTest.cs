@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class S03_CollisionTest : MonoBehaviour
 {
-    float speedMove = 10.0f;
-    float speedRotate = 90.0f;
-    Rigidbody rigidbody;
+    //float speedMove = 10.0f;
+    //float speedRotate = 90.0f;
+    Rigidbody rigid;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = gameObject.GetComponent<Rigidbody>();
+        rigid = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
