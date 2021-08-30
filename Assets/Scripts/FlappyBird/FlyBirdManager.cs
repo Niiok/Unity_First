@@ -29,6 +29,14 @@ public class FlyBirdManager : MonoBehaviour
         }
     }
 
+    public float global_speed
+    {
+        get
+        {
+            return 1 + score / 10;
+        }
+    }
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
