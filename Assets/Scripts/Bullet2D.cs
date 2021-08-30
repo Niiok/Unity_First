@@ -5,12 +5,12 @@ using UnityEngine;
 public class Bullet2D : MonoBehaviour
 {
     public GameObject owner;
-    public float speed;
+    public float speed = 10.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(gameObject, 1/speed);
     }
 
     // Update is called once per frame
@@ -21,12 +21,18 @@ public class Bullet2D : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject != owner)
+        if(collision.gameObject != owner && collision.rigidbody != null)
         {
-            collision.rigidbody.AddTorque(180 * collision.rigidbody.mass);
-            collision.rigidbody.AddForce(new Vector2(collision.rigidbody.mass, collision.rigidbody.mass));
+            collision.rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            collision.rigidbody.AddTorque(180 * collision.rigidbody.mass*5);
+            collision.rigidbody.AddForce(new Vector2(collision.rigidbody.mass*300, collision.rigidbody.mass*300));
+
+            collision.collider.enabled = false;
             Destroy(collision.gameObject, 5.0f);
-            Destroy(gameObject);
         }
+
+            Destroy(gameObject);
+
     }
+
 }

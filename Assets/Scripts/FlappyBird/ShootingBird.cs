@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bird : MonoBehaviour
+public class ShootingBird : MonoBehaviour
 {
     public float jump_power = 200.0f;
     private Rigidbody2D rigid = null;
     private SpriteRenderer sprite_renderer;
     private Animator animator;
     public Sprite[] sprites;
+    public GameObject bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -65,9 +66,13 @@ public class Bird : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
         {
             rigid.AddForce(jump_power * Vector2.up * rigid.mass);
+
+            Bullet2D bul_script = Instantiate(bullet, transform.position + Vector3.right*0.8f, transform.rotation).GetComponent<Bullet2D>();
+            bul_script.owner = this.gameObject;
         }
 
         transform.rotation = Quaternion.AngleAxis(rigid.velocity.y / rigid.mass * 5, transform.forward);
+
     }
 
     void Update_Ko()
