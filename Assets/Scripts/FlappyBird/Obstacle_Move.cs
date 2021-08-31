@@ -5,11 +5,13 @@ using UnityEngine;
 public class Obstacle_Move : MonoBehaviour
 {
     public float speed = 5.0f;
+    AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 30 / speed); 
+        Destroy(gameObject, 30 / speed);
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,5 +25,10 @@ public class Obstacle_Move : MonoBehaviour
         {
             Destroy(gameObject, 0);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        audio.Play();
     }
 }

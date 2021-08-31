@@ -12,6 +12,7 @@ public class ShootingBird : MonoBehaviour
     SpriteRenderer sprite_renderer;
     Animator animator;
     float bullet_range = 1;
+    bool ready_to_start = false;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +73,7 @@ public class ShootingBird : MonoBehaviour
             GameObject bul = Instantiate(bullet, transform.position + Vector3.right * 0.8f, transform.rotation);
             Bullet2D bul_script = bul.GetComponent<Bullet2D>();
 
-            Destroy(bul, bullet_range / bul_script.speed);
+            Destroy(bul, bullet_range*2 / bul_script.speed);
         }
 
         transform.rotation = Quaternion.AngleAxis(rigid.velocity.y / rigid.mass * 5, transform.forward);
@@ -86,17 +87,21 @@ public class ShootingBird : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
             sprite_renderer.sprite = sprites[8];
 
+            ready_to_start = true;
 
-            if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
-            {
-                rigid.AddForce(jump_power * Vector2.up * rigid.mass * 0.5f);
+        }
 
-                animator.enabled = true;
-                animator.Play("Base Layer.bird_idle");
-                animator.speed = 0.2f;
-                FlyBirdManager.Instance.state = FlyBirdManager.State.Sleep;
-                FlyBirdManager.Instance.score = 0;
-            }
+        if (ready_to_start && Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        {
+            rigid.AddForce(jump_power * Vector2.up * rigid.mass * 0.5f);
+
+            animator.enabled = true;
+            animator.Play("Base Layer.bird_idle");
+            animator.speed = 0.2f;
+            FlyBirdManager.Instance.state = FlyBirdManager.State.Sleep;
+            FlyBirdManager.Instance.score = 0;
+
+            ready_to_start = false;
         }
     }
 
@@ -138,22 +143,22 @@ public class ShootingBird : MonoBehaviour
     //    sprite_renderer.sprite = sprites[3];
     //}
 
-    private void OnGUI()
-    {
-        float width = Screen.width;
-        float height = Screen.height;
+    //private void OnGUI()
+    //{
+    //    float width = Screen.width;
+    //    float height = Screen.height;
 
-        if (FlyBirdManager.Instance.state == FlyBirdManager.State.Fly)
-        {
-            GUI.Box(new Rect(width / 2 - width / 20, height / 20, width / 10, height / 10), "\n" + FlyBirdManager.Instance.score.ToString());
-        }
-        else if (FlyBirdManager.Instance.state == FlyBirdManager.State.Ko)
-        {
-            GUI.Box(new Rect(width / 2 - width / 10, height / 10, width / 5, height / 5), "Your \nScore \nis \n\n" + FlyBirdManager.Instance.score.ToString());
-        }
-        else if (FlyBirdManager.Instance.state == FlyBirdManager.State.Sleep)
-        {
-            GUI.Box(new Rect(width / 2 - width / 10, height / 2 - height / 10, width / 5, height / 5), "\nPress \nto \nStart!");
-        }
-    }
+    //    if (FlyBirdManager.Instance.state == FlyBirdManager.State.Fly)
+    //    {
+    //        GUI.Box(new Rect(width / 2 - width / 20, height / 20, width / 10, height / 10), "\n" + FlyBirdManager.Instance.score.ToString());
+    //    }
+    //    else if (FlyBirdManager.Instance.state == FlyBirdManager.State.Ko)
+    //    {
+    //        GUI.Box(new Rect(width / 2 - width / 10, height / 10, width / 5, height / 5), "Your \nScore \nis \n\n" + FlyBirdManager.Instance.score.ToString());
+    //    }
+    //    else if (FlyBirdManager.Instance.state == FlyBirdManager.State.Sleep)
+    //    {
+    //        GUI.Box(new Rect(width / 2 - width / 10, height / 2 - height / 10, width / 5, height / 5), "\nPress \nto \nStart!");
+    //    }
+    //}
 }
