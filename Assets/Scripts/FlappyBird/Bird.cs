@@ -68,7 +68,6 @@ public class Bird : MonoBehaviour
         }
 
         transform.rotation = Quaternion.AngleAxis(rigid.velocity.y / rigid.mass * 5, transform.forward);
-        FlyBirdManager.Instance.score += Time.deltaTime;
     }
 
     void Update_Ko()
@@ -130,6 +129,10 @@ public class Bird : MonoBehaviour
     //    sprite_renderer.sprite = sprites[3];
     //}
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        FlyBirdManager.Instance.score += 1;
+    }
 
     private void OnGUI()
     {

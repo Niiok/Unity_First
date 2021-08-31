@@ -27,7 +27,7 @@ public class Obstacle_Spawner : MonoBehaviour
 
                 Instantiate(obstaclePrefab, transform.position, transform.rotation);
 
-                time = interval - interval / FlyBirdManager.Instance.global_speed;
+                time = 0;
             }
         }
     }
