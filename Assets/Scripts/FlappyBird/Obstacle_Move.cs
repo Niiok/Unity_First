@@ -17,7 +17,7 @@ public class Obstacle_Move : MonoBehaviour
     {
         if (FlyBirdManager.Instance.state == FlyBirdManager.State.Fly)
         {
-            this.transform.Translate(-speed * Time.deltaTime, 0, 0);
+            this.transform.Translate(-speed * FlyBirdManager.Instance.global_speed * Time.deltaTime, 0, 0);
         }
         else
         {

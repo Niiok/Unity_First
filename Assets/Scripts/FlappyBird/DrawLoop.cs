@@ -20,7 +20,7 @@ public class DrawLoop : MonoBehaviour
     {
         if (FlyBirdManager.Instance.state == FlyBirdManager.State.Fly)
         {
-            transform.Translate(-speed_ * Time.deltaTime, 0, 0);
+            transform.Translate(-speed_ * FlyBirdManager.Instance.global_speed * Time.deltaTime, 0, 0);
 
             if (origin.x - transform.position.x > 20)
                 transform.position = origin;

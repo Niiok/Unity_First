@@ -10,7 +10,6 @@ public class Bullet2D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 1/speed);
     }
 
     // Update is called once per frame
@@ -25,7 +24,7 @@ public class Bullet2D : MonoBehaviour
         {
             collision.rigidbody.bodyType = RigidbodyType2D.Dynamic;
             collision.rigidbody.AddTorque(180 * collision.rigidbody.mass*5);
-            collision.rigidbody.AddForce(new Vector2(collision.rigidbody.mass*300, collision.rigidbody.mass*300));
+            collision.rigidbody.AddForce(new Vector2(collision.rigidbody.mass*300*FlyBirdManager.Instance.global_speed, collision.rigidbody.mass*300));
 
             collision.collider.enabled = false;
             Destroy(collision.gameObject, 5.0f);

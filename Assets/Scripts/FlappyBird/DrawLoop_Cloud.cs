@@ -21,7 +21,7 @@ public class DrawLoop_Cloud : MonoBehaviour
     {
         if (FlyBirdManager.Instance.state == FlyBirdManager.State.Fly)
         {
-            transform.Translate(-speed_ * Time.deltaTime, 0, 0);
+            transform.Translate(-speed_ * FlyBirdManager.Instance.global_speed * Time.deltaTime, 0, 0);
         }
         else
         {

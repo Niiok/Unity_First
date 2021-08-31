@@ -5,11 +5,13 @@ using UnityEngine;
 public class ShootingBird : MonoBehaviour
 {
     public float jump_power = 200.0f;
-    private Rigidbody2D rigid = null;
-    private SpriteRenderer sprite_renderer;
-    private Animator animator;
     public Sprite[] sprites;
     public GameObject bullet;
+
+    Rigidbody2D rigid = null;
+    SpriteRenderer sprite_renderer;
+    Animator animator;
+    float bullet_range = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -67,12 +69,14 @@ public class ShootingBird : MonoBehaviour
         {
             rigid.AddForce(jump_power * Vector2.up * rigid.mass);
 
-            Bullet2D bul_script = Instantiate(bullet, transform.position + Vector3.right*0.8f, transform.rotation).GetComponent<Bullet2D>();
-            bul_script.owner = this.gameObject;
+            GameObject bul = Instantiate(bullet, transform.position + Vector3.right * 0.8f, transform.rotation);
+            Bullet2D bul_script = bul.GetComponent<Bullet2D>();
+
+            Destroy(bul, bullet_range / bul_script.speed);
         }
 
         transform.rotation = Quaternion.AngleAxis(rigid.velocity.y / rigid.mass * 5, transform.forward);
-
+        FlyBirdManager.Instance.score += Time.deltaTime;
     }
 
     void Update_Ko()
@@ -133,11 +137,6 @@ public class ShootingBird : MonoBehaviour
     //    animator.enabled = false;
     //    sprite_renderer.sprite = sprites[3];
     //}
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        FlyBirdManager.Instance.score += 1;
-    }
 
     private void OnGUI()
     {
