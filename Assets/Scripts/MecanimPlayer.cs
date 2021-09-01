@@ -27,7 +27,7 @@ public class MecanimPlayer : MonoBehaviour
     void Update()
     {
         direction.x = Input.GetAxis("Horizontal");
-        direction.y = Input.GetAxis("Jump");
+        //direction.y = Input.GetAxis("Jump");
         direction.z = Input.GetAxis("Vertical");
 
         CharacterControl_Slerp();
@@ -36,9 +36,11 @@ public class MecanimPlayer : MonoBehaviour
 
         //IKraycast();
 
-        anim.SetFloat("Speed", direction.magnitude);
-
-        anim.SetFloat("Fire1", Input.GetAxis("Fire1"));
+        if (anim != null)
+        {
+            anim.SetFloat("Speed", direction.magnitude);
+            anim.SetFloat("Fire1", Input.GetAxis("Fire1"));
+        }
     }
 
     void CharacterControl_Slerp()
