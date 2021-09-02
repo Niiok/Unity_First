@@ -20,18 +20,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool count_seconds = true;
+    public float seconds = 0;
+    public float timeover = 120;
+    public float time_scale
+    {
+        get
+        {
+            return seconds / timeover;
+        }
+    }
+
     public float score = 0;
     public float global_speed
     {
         get
         {
-            return 1 + score / 10;
+            return 1 + score / 60;
         }
     }
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Update()
+    {
+        if (count_seconds)
+            seconds += Time.deltaTime;
     }
 
     public void ChangeScene(string sceneName)

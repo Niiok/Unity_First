@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SnowMerge : MonoBehaviour
 {
+    public float merge_ratio = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class SnowMerge : MonoBehaviour
 
         if (collision.transform.localScale.y * 2 < transform.localScale.y)
         {
-            transform.localScale += collision.transform.localScale;
+            transform.localScale += collision.transform.localScale * merge_ratio;
         }
         else if(collision.transform.localScale.y > transform.localScale.y * 2)
         {
@@ -37,7 +39,7 @@ public class SnowMerge : MonoBehaviour
 
         if (other.transform.localScale.y * 2 < transform.localScale.y)
         {
-            transform.localScale += other.transform.localScale;
+            transform.localScale += other.transform.localScale * merge_ratio;
         }
         else if(other.transform.localScale.y > transform.localScale.y * 2)
         {

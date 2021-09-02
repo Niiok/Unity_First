@@ -688,9 +688,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   right_pos_weight: 1
-  right_rot_weight: 0
+  right_rot_weight: 1
   left_pos_weight: 1
-  left_rot_weight: 0
+  left_rot_weight: 1
   Ik_active: 1
   foot_offset: {x: 0, y: 0.075, z: 0}
   ray_mask:

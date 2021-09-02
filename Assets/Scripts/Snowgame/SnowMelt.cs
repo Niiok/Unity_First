@@ -16,9 +16,11 @@ public class SnowMelt : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        transform.localScale -= transform.localScale * melt_speed/100 * Time.deltaTime;
+        for (float i = GameManager.Instance.time_scale; i > 0; i--)
+            transform.localScale -= transform.localScale * melt_speed / 100 * Time.deltaTime * (0.5f + GameManager.Instance.time_scale);
+
         if (light_comp != null)
             light_comp.range = transform.localScale.magnitude;
 

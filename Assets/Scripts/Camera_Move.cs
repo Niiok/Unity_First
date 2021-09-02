@@ -29,9 +29,20 @@ public class Camera_Move : MonoBehaviour
     void Update()
     {
         Vector3 new_loc = transform.position;
-        new_loc.x = look.transform.position.x + offset.x;
-        new_loc.z = look.transform.position.z + offset.z;
-        transform.position = new_loc;
+        if (look != null && look.activeSelf == true)
+        {
+            new_loc.x = look.transform.position.x + offset.x;
+            new_loc.z = look.transform.position.z + offset.z;
+            transform.position = new_loc;
+        }
+
+        float spin = 0;
+        if (Input.GetKey(KeyCode.Q))
+            spin--;
+        if (Input.GetKey(KeyCode.E))
+            spin++;
+
+        transform.Rotate(0, 180.0f * Time.deltaTime * spin, 0);
         //AdvancedUpdate();
     }
 
