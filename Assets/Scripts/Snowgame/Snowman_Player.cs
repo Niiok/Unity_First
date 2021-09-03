@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Snowman_Player : MonoBehaviour
 {
-    //[Range(0, 100)]
-    //public float melt_speed = 2.0f;
+    [Range(0, 100)]
+    public float melt_speed = 6.0f;
     public float walk_speed = 5.0f;
     public float rot_speed = 360.0f;
 
@@ -30,7 +30,14 @@ public class Snowman_Player : MonoBehaviour
         if (transform.localScale.sqrMagnitude > GameManager.Instance.score)
             GameManager.Instance.score = (int)transform.localScale.sqrMagnitude;
 
-        //transform.localScale -= transform.localScale * melt_speed / 100 * Time.deltaTime * (1+GameManager.Instance.time_scale);
+        for (float i = GameManager.Instance.time_scale; i > 0; i--)
+            transform.localScale -= transform.localScale * melt_speed / 100 * Time.deltaTime * (0.5f + GameManager.Instance.time_scale);
+
+        if (transform.localScale.sqrMagnitude < 1e-1)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         Vector3 mov = Vector3.zero;
         mov += transform.forward * Input.GetAxis("Vertical");
@@ -38,10 +45,6 @@ public class Snowman_Player : MonoBehaviour
 
         char_con.SimpleMove(mov * walk_speed);
 
-        //if (transform.localScale.sqrMagnitude < 1e-1)
-        //{
-        //    Destroy(gameObject);
-        //}
     }
 
     void CharacterControl_Slerp()

@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: d708569c19d192940b2bec534744d0b7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: ce8618c24c8c5dc498609a255ad823fa, type: 2}
 --- !u!1001 &96235911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1774,6 +1774,10 @@ PrefabInstance:
     - target: {fileID: 3711730199974193738, guid: f5c490be53d7c604d9b332f8d1cdd4c3, type: 3}
       propertyPath: m_Name
       value: Snowman_Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711730199974193739, guid: f5c490be53d7c604d9b332f8d1cdd4c3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5c490be53d7c604d9b332f8d1cdd4c3, type: 3}

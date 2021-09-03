@@ -33,7 +33,7 @@ public class IK_Foot : MonoBehaviour
             // right
             Vector3 foot_pos = anim.GetIKPosition(AvatarIKGoal.RightFoot);
 
-            if (Physics.Raycast(foot_pos + Vector3.up, Vector3.down, out ray_hit, 1.2f, ray_mask))
+            if (Physics.Raycast(foot_pos + Vector3.up, Vector3.down, out ray_hit, 1.5f, ray_mask))
             {
                 anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, right_pos_weight);
                 anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, right_rot_weight);

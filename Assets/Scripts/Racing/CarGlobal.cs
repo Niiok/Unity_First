@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarGlobal : MonoBehaviour
 {
     private float speed = 0;
-    public float accel = 0.1f;
+    public float accel = 15f;
     public float decel = 1;
     Rigidbody rigid;
 
@@ -17,7 +17,7 @@ public class CarGlobal : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {        
         Update_rigid();
     }
@@ -61,12 +61,12 @@ public class CarGlobal : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             rigid.velocity = transform.forward * rigid.velocity.magnitude;
-            rigid.AddForce(transform.forward * accel /** Time.deltaTime*/ * rigid.mass);
+            rigid.AddForce(transform.forward * accel * rigid.mass);
         }
         if (Input.GetKey(KeyCode.S))
         {
             rigid.AddForce(-rigid.velocity);
-            rigid.AddForce(-transform.forward * accel /** Time.deltaTime*/ * rigid.mass);
+            rigid.AddForce(-transform.forward * accel * rigid.mass);
         }
 
         
