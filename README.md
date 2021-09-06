@@ -21,7 +21,6 @@
 ## 09Mecanim
 ![meca](_sample/mecanim_0.PNG)
 ![meca](_sample/mecanim_1.PNG)
-![meca](_sample/mecanim_2.PNG)
 
 ## Snowgame
 ![snow](_sample/snowgame_0.PNG)
